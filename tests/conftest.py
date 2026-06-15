@@ -1,0 +1,7 @@
+"""Shared pytest fixtures for the test suite."""
+
+import sys
+import os
+
+# Ensure src is importable
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))

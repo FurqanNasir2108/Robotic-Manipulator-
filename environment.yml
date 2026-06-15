@@ -1,0 +1,9 @@
+name: three-link-manipulator
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip>=25
+  - pip:
+      - -r requirements.txt
+      - -e .

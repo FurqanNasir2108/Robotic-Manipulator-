@@ -1,0 +1,58 @@
+# Conditional VAE configuration
+model:
+  type: cvae
+  latent_dim: 16
+  encoder_type: bigru       # bigru | cnn
+  decoder_type: gru         # gru | cnn
+  condition_type: waypoint  # waypoint | goal_pose
+  condition_dim: 64
+  input_steps: 100
+  input_dim: 3
+  output_steps: 100
+  output_dim: 3
+
+  # Condition encoder (1D CNN on waypoints)
+  cond_conv_channels: [32, 64]
+  cond_kernel_sizes: [5, 3]
+
+  # VAE Encoder (BiGRU)
+  enc_hidden: 128
+  enc_layers: 2
+  enc_dropout: 0.1
+
+  # VAE Decoder (GRU)
+  dec_hidden: 128
+  dec_layers: 2
+  dec_dropout: 0.1
+  dec_fc_dims: [64]
+
+  # CNN decoder alternative
+  dec_conv_channels: [128, 64, 32]
+  dec_kernel_sizes: [5, 5, 3]
+
+losses:
+  recon_weight: 1.0
+  kl_weight: 0.01
+  energy_weight: 0.001
+  smoothness_weight: 0.001
+  kl_annealing: cyclical     # monotonic | cyclical | free_bits
+  kl_warmup_epochs: 50
+  kl_cycle_epochs: 20
+  free_bits_lambda: 0.1
+
+training:
+  epochs: 500
+  batch_size: 64
+  lr: 0.0003
+  optimizer: adam
+  scheduler: cosine
+  seed: 42
+  early_stop_patience: 60
+  grad_clip: 1.0
+  use_amp: false
+
+data:
+  dir: data/processed
+  metadata_dir: data/metadata
+  input_mode: waypoints
+  normalization: z_score

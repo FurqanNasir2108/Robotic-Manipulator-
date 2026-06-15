@@ -1,0 +1,47 @@
+evaluation:
+  seed: 42
+  batch_size: 1
+  max_test_samples: null
+  subset_strategy: stratified  # stratified | random | ordered
+  generative_samples: 10
+  inference_runs: 10
+  latency_num_conditions: 3
+  latency_subset_strategy: stratified
+  oracle_metric: joint_rmse
+  cache_trajectories_dir: results/generated_trajectories
+  cache_full_generative_samples: true
+
+models:
+  include:
+    - analytical_ik
+    - cnn
+    - cnn_lstm
+    - cnn_gru
+    - cvae
+    - diffusion_ddim
+  include_diffusion_ddpm: false
+
+sampling:
+  cvae_samples: 10
+  diffusion_guidance_scale: 2.0
+  diffusion_ddim_steps: 50
+  diffusion_ddpm_steps: 1000
+  diffusion_seq_len: 100
+
+paths:
+  data_dir: data/processed
+  metadata_dir: data/metadata
+  summary_json: results/metrics/summary.json
+  summary_md: results/metrics/summary.md
+  comparison_figure: figures/comparison/main_comparison.png
+  overlay_figure: figures/comparison/trajectory_overlay.png
+  plots_dir: results/plots
+
+metrics:
+  dt: 1.0
+  path_method: dtw
+  diversity_method: dtw
+
+# References to extended analysis configs
+trajectory_analysis_config: configs/trajectory_analysis.yaml
+edge_deployment_config: configs/edge_deployment.yaml

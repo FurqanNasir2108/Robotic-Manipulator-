@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+.pytest_cache/
+
+# Data and checkpoints
+data/
+results/
+checkpoints/
+*.h5
+*.npz
+*.pth
+*.ckpt
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Notebook caches
+.ipynb_checkpoints/
+
+# Generated standalone experiment outputs
+standalone_cvae_full_run/
+standalone_cvae_smoketest/
+standalone_remaining_eval_run/
+standalone_remaining_eval_run_smoke_local/
+standalone_cvae_smoketest.zip

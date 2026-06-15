@@ -1,0 +1,58 @@
+# Dataset generation configuration
+num_waypoints: 100
+
+# Number of samples per shape for training
+samples_per_shape:
+  circle: 5000
+  square: 5000
+  pentagon: 5000
+  line: 5000
+  random_smooth: 5000
+
+# Hexagon reserved for generalization testing only
+test_only_shapes:
+  hexagon: 2000
+
+# Train/val/test split ratios (applied to samples_per_shape shapes)
+split_ratios:
+  train: 0.8
+  val: 0.1
+  test: 0.1
+
+# Random seed for reproducibility
+random_seed: 42
+
+# Normalization strategy: 'min_max' or 'z_score'
+normalization: 'z_score'
+
+# Shape-specific generation parameters
+shape_params:
+  circle:
+    center: [1.5, 0.0]
+    radius: [0.15, 0.4]          # min/max radius range
+    theta_orient: [-0.5, 0.5]    # min/max orientation range
+  square:
+    center: [1.5, 0.0]
+    side_length: [0.2, 0.6]
+    theta_orient: [-0.5, 0.5]
+  pentagon:
+    center: [1.5, 0.0]
+    radius: [0.15, 0.35]
+    theta_orient: [-0.5, 0.5]
+  hexagon:
+    center: [1.5, 0.0]
+    radius: [0.15, 0.35]
+    theta_orient: [-0.5, 0.5]
+  line:
+    x_range: [1.0, 2.0]
+    y_range: [-0.5, 0.5]
+    theta_orient: [-0.5, 0.5]
+  random_smooth:
+    workspace_center: [1.5, 0.0]
+    workspace_radius: 0.35
+    num_control_points: [4, 8]
+    theta_orient: [-0.5, 0.5]
+
+# Output paths
+output_dir: 'data/processed'
+metadata_dir: 'data/metadata'

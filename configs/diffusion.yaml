@@ -1,0 +1,50 @@
+# Conditional Diffusion Model configuration
+model:
+  type: diffusion
+  denoiser_type: unet_1d
+  num_timesteps: 1000
+  beta_schedule: cosine        # linear | cosine
+  channels: [64, 128, 256]
+  time_embed_dim: 128
+  condition_dim: 64
+  kernel_size: 3
+  dropout: 0.1
+  joint_dim: 3
+  input_dim: 3
+
+  # Condition encoder (1D CNN on waypoints)
+  cond_conv_channels: [32, 64]
+  cond_kernel_sizes: [5, 3]
+
+  # Classifier-free guidance
+  classifier_free_guidance: true
+  guidance_dropout: 0.1
+  guidance_scale: 2.0
+
+  # EMA
+  ema_decay: 0.9999
+
+training:
+  epochs: 500
+  batch_size: 64
+  lr: 0.0002
+  optimizer: adamw
+  weight_decay: 0.01
+  seed: 42
+  grad_clip: 1.0
+  use_amp: false
+  early_stop_patience: 80
+  log_interval: 10
+
+sampling:
+  method: ddim                 # ddpm | ddim
+  ddim_steps: 75
+  ddpm_steps: 1000
+  guidance_scale: 2.0
+  seq_len: 100
+
+data:
+  dir: data/processed
+  metadata_dir: data/metadata
+  input_mode: waypoints
+  normalization: z_score

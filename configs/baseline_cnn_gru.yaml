@@ -1,0 +1,37 @@
+model:
+  type: cnn_gru
+  input_steps: 100
+  input_dim: 3
+  output_steps: 100
+  output_dim: 3
+  conv_channels: [32, 64]
+  kernel_sizes: [5, 3]
+  gru_hidden: 128
+  gru_layers: 2
+  gru_dropout: 0.1
+  fc_dims: [64]
+  activation: relu
+  dropout: 0.1
+
+training:
+  epochs: 200
+  batch_size: 64
+  lr: 0.001
+  optimizer: adam
+  scheduler: cosine
+  seed: 42
+  early_stop_patience: 30
+  grad_clip: 1.0
+  use_amp: false
+
+loss:
+  type: combined
+  mse_weight: 1.0
+  smoothness_weight: 0.01
+  endpoint_weight: 2.0
+
+data:
+  dir: data/processed
+  metadata_dir: data/metadata
+  input_mode: waypoints
+  normalization: z_score

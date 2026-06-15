@@ -1,0 +1,55 @@
+deployment:
+  primary_model: cvae
+  secondary_model: diffusion_ddim
+
+export:
+  format: onnx
+  opset_version: 17
+  dynamic_axes: false
+  input_shape: [1, 10, 3]   # [batch, waypoints, dims]
+  output_shape: [1, 100, 3]  # [batch, timesteps, joints]
+
+optimization:
+  quantization: [fp32, fp16, int8]
+  graph_optimization: true
+  onnx_runtime_optimization_level: all  # basic | extended | all
+
+benchmark:
+  n_runs: 1000
+  warmup: 100
+  device: cpu  # cpu | cuda | tensorrt
+  batch_sizes: [1, 4, 8]
+
+validation:
+  max_joint_rmse_deviation: 0.001
+  max_ee_error_deviation: 0.002
+
+communication:
+  protocol: rest  # rest | mqtt | websocket | ros2
+  host: 127.0.0.1
+  port: 8080
+  mqtt_broker: null
+  mqtt_topic: trajectory/request
+
+monitoring:
+  log_latency: true
+  log_memory: true
+  log_cpu: true
+  log_gpu: false
+
+models:
+  include:
+    - cvae
+    - cnn
+    - cnn_lstm
+    - cnn_gru
+    - diffusion_ddim
+
+paths:
+  checkpoints_dir: results/checkpoints/onnx
+  metrics_dir: results/metrics/edge_deployment
+  figures_dir: figures/edge_deployment
+  report_format:
+    - json
+    - csv
+    - md

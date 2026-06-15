@@ -1,0 +1,47 @@
+analysis:
+  dt: 0.01
+  smoothing_window: 5
+  smoothing_method: savgol  # savgol | moving_average
+
+  # Velocity and acceleration limits per joint (rad/s, rad/s²)
+  velocity_limits: [3.14, 3.14, 3.14]
+  acceleration_limits: [10.0, 10.0, 10.0]
+  torque_limits: [50.0, 50.0, 25.0]
+
+  # Link dynamics parameters (for torque computation)
+  link_masses: [1.0, 1.0, 0.5]
+  link_com_distances: [0.5, 0.5, 0.25]
+  link_inertias: [0.083, 0.083, 0.010]
+  gravity: 0.0  # 0 for planar horizontal arm
+
+  diversity:
+    n_samples: 10
+    best_of_k: [1, 5, 10]
+    method: dtw  # dtw | l2
+
+  robustness:
+    noise_levels: [0.001, 0.01, 0.05, 0.1]
+    pose_perturbation: 0.05
+    n_repetitions: 5
+
+  statistics:
+    percentiles: [50, 95, 99]
+    confidence_level: 0.95
+
+  models:
+    include:
+      - analytical_ik
+      - cnn
+      - cnn_lstm
+      - cnn_gru
+      - cvae
+      - diffusion_ddim
+
+paths:
+  generated_trajectories_dir: results/generated_trajectories
+  metrics_dir: results/metrics/trajectory_analysis
+  figures_dir: figures/trajectory_analysis
+  report_format:
+    - json
+    - csv
+    - md
