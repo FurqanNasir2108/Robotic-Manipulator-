@@ -41,7 +41,7 @@ Current dataset targets:
 ```text
 .
 ├── configs/                 # YAML configs for data, training, evaluation, analysis
-├── docs/                    # project guides, instruction packs, repo admin notes
+├── docs/                    # local guides and instruction packs (gitignored)
 ├── figures/                 # generated thesis/report figures tracked in git
 ├── notebooks/               # standalone notebooks for training and evaluation workflows
 ├── scripts/                 # CLI entry points for data, training, evaluation, export
@@ -163,7 +163,7 @@ Tests are organized into:
 
 ## Outputs
 
-Tracked repository assets mainly include code, configs, docs, notebooks, and publication-style figures. Large generated artifacts are intentionally excluded from git, including:
+Tracked repository assets mainly include code, configs, notebooks, thesis materials, and publication-style figures. Large generated artifacts and local-only working materials are intentionally excluded from git, including:
 
 - dataset files in `data/`
 - checkpoints and metrics in `results/`
@@ -172,13 +172,10 @@ Tracked repository assets mainly include code, configs, docs, notebooks, and pub
 
 This keeps the repository lightweight while preserving the code and documentation needed to reproduce the runs locally.
 
-## Documentation and Writing Assets
+## Writing Assets
 
 Useful entry points:
 
-- [docs/instructions/00_main_orchestrator.instructions.md](docs/instructions/00_main_orchestrator.instructions.md)
-- [docs/REPORT_GENERATION_GUIDE.md](docs/REPORT_GENERATION_GUIDE.md)
-- [docs/PRESENTATION_GUIDE.md](docs/PRESENTATION_GUIDE.md)
 - [thesis_notes/project_status.md](thesis_notes/project_status.md)
 - [thesis_notes/chapter_drafts/](thesis_notes/chapter_drafts/)
 
@@ -194,7 +191,11 @@ The codebase is strong on implementation coverage, but some thesis-grade executi
 
 ## Repository Metadata
 
-Suggested GitHub repo metadata and branch-protection settings are documented in [docs/GITHUB_REPO_RECOMMENDATIONS.md](docs/GITHUB_REPO_RECOMMENDATIONS.md).
+Suggested GitHub setup:
+
+- description: `Research codebase for trajectory generation, evaluation, and edge deployment in a 3-link planar robotic manipulator using CNN baselines, conditional VAE, and diffusion models.`
+- topics: `robotics`, `robot-manipulator`, `trajectory-generation`, `inverse-kinematics`, `pytorch`, `variational-autoencoder`, `diffusion-model`, `onnx`, `edge-deployment`, `research-code`
+- protect `main` with pull requests, at least one approval, stale approval dismissal, resolved conversations, and force-push protection
 
 ## License
 

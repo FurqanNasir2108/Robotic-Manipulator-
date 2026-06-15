@@ -32,6 +32,9 @@ checkpoints/
 # Notebook caches
 .ipynb_checkpoints/
 
+# Project docs
+docs/
+
 # Generated standalone experiment outputs
 standalone_cvae_full_run/
 standalone_cvae_smoketest/
